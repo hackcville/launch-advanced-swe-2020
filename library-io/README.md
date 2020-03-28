@@ -60,3 +60,26 @@ fetch('/api/books?title=the+outsiders')
   .then(res => res.json())
   .then(console.log);
 ```
+
+# Nicer dev environment
+
+Install Nodemon for auto-reloading for Node:
+
+```bash
+npm i nodemon --save-dev
+```
+
+Edit our `package.json` scripts:
+
+```json
+{
+  "scripts": {
+    "start": "node app",
+    "dev:server": "nodemon app.js --watch app.js",
+    "dev:client": "react-scripts start",
+    "build": "react-scripts build"
+  }
+}
+```
+
+Now we can just `npm run dev:server` and `npm run dev:client` in development.
