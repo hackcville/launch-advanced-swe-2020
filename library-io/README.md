@@ -1,126 +1,21 @@
-# Creating our server
+# Library Manager
 
-Initialize project: `npm init -y`
+You are tasked with building out a personal library management platform using React, a Node.js backend, Firebase services and the Google Books API. These are your requirements:
 
-`npm i express isomorphic-fetch`!
+- Users can search for books available on the [Google Books API](https://developers.google.com/books/docs/v1/getting_started) by various properties (title, author, etc). The request to Google to fetch books should happen within Node.js, not React.
 
-Create `app.js` --> run with `node app`!
+- Users can add books to their personal collection using [Cloud Firestore](https://firebase.google.com/docs/firestore/quickstart)
 
-```js
-const express = require('express');
-const app = express();
+- Users can view their collection on a separate page (use [React Router](https://reacttraining.com/react-router/web/guides/quick-start) for this!)
 
-app.listen(8080, () => {
-  console.log('Server listening on port 8080');
-});
-```
+- Make it look good! You're welcome to use any combination of styling solutions we've discussed in the past: vanilla CSS, `style` props, Material-UI styling, styled-components or anything else you enjoy working with.
 
-```js
-app.get('/some/path', (req, res) => {
-  // ....
-  res.send('Hello world!');
-  // or...
-  res.json({ hello: 'world!' });
-});
-```
+Additionally, here are some things that would be nice to implement if you have time (in order of estimated difficulty):
 
-Use the Google Books API to fetch some data and return to the user!
+- Users can download their data as a JSON file for personal reference (so you can be [GDPR compliant!](https://howto.socialchorus.com/hc/en-us/articles/360005911014-Export-or-Forget-a-User-s-Data-GDPR-Compliance)).
 
-Grab these fields (or any others you'd like to show the user): id, title, author, description, rating, image
+- Users can log in to your site using [Firebase Authentication](https://firebase.google.com/docs/auth/web/start) and have their own personal collection (so no one can see their books!). This will require you to restructure how you store data within Firestore.
 
-# React!
+- Look into deploying your app onto Firebase (you will need [Firebase Hosting](https://firebase.google.com/docs/hosting) and [Cloud Functions](https://firebase.google.com/docs/functions)). We'll cover this during training, so don't worry about this requirement too much.
 
-Create our project:
-
-```
-npx create-react-app your-app
-```
-
-Feel free to do some pruning to remove css files / test packages if you want.
-
-Make sure to add this property to your `package.json`!
-
-```diff
-{
-  "name": "library-io",
-  "version": "0.1.0",
-  "dependencies": {
-    ...
-  },
-  ...
-+ "proxy": "http://localhost:8080"
-}
-
-```
-
-You can now make relative requests in React:
-
-```js
-fetch('/api/books?title=the+outsiders')
-  .then(res => res.json())
-  .then(console.log);
-```
-
-# Nicer dev environment
-
-Install Nodemon for auto-reloading for Node:
-
-```bash
-npm i nodemon --save-dev
-```
-
-Edit our `package.json` scripts:
-
-```json
-{
-  "scripts": {
-    "start": "node app",
-    "dev:server": "nodemon app.js --watch app.js",
-    "dev:client": "react-scripts start",
-    "build": "react-scripts build"
-  }
-}
-```
-
-Now we can just `npm run dev:server` and `npm run dev:client` in development.
-
-# Firebase Configuration
-
-Configure a new project on the Firebase console. When you choose to configure a new web app (on the main dashboard screen), take note of the configuration values it gives you. Add the following fields to your `.env` (with the values from Firebase filled in):
-
-```
-REACT_APP_API_KEY=XXXXxxxx
-REACT_APP_AUTH_DOMAIN=xxxxXXXX.firebaseapp.com
-REACT_APP_DATABASE_URL=https://xxxXXXX.firebaseio.com
-REACT_APP_PROJECT_ID=xxxxXXXX
-```
-
-In your React app, create a `firebase.js` with following contents:
-
-```js
-import firebase from 'firebase/app';
-// Import any Firebase features you'll be using in your app
-import 'firebase/firestore';
-import 'firebase/auth';
-
-const config = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_DATABASE_URL,
-  projectId: process.env.REACT_APP_PROJECT_ID
-};
-
-firebase.initializeApp(config);
-export default firebase;
-```
-
-Now, anywhere in your project, you can just import our custom Firebase file and use any features:
-
-```js
-import firebase from './firebase';
-
-const db = firebase.firestore();
-// Perform some db action
-// https://firebase.google.com/docs/firestore/manage-data/add-data
-// https://firebase.google.com/docs/firestore/query-data/get-data
-```
+Please complete the required tasks by our first day of training, **Monday May 18th**. As always, I'm available via Slack or Zoom to help out with any issues you may run into.
