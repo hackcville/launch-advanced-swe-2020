@@ -6,7 +6,7 @@ For starters, if you haven't already, try implementing email and password authen
 
 Once you're done with that, try making per-user collections in Firestore. Rather than storing a single `books` collection at the top-level of your database that all users share, try creating user-specific collections instead. You will need a unique identifier for each user to keep track of their data.
 
-Once you've done that, try securing your data - just because it's organized per-user doesn't mean malicious hackers can't read all collections. The [Firesore security docs](https://firebase.google.com/docs/firestore/security/overview) provide some excellent resources on app security. [This article from Fireship.io](https://fireship.io/snippets/firestore-rules-recipes/) also covers some convenient patterns when writing rules.
+Once you've done that, try securing your data - just because it's organized per-user doesn't mean malicious hackers can't read all collections. The [Firestore security docs](https://firebase.google.com/docs/firestore/security/overview) provide some excellent resources on app security. [This article from Fireship.io](https://fireship.io/snippets/firestore-rules-recipes/) also covers some convenient patterns when writing rules.
 
 If you're all done with that (phew), try implementing public profile pages for all of your users. Collect data such as full name, bio and book preference and create dedicated pages for each user that shows their info. [React Router params](https://reacttraining.com/react-router/web/example/url-params) will be your friend here! Also don't forget about security rules - everyone can view profiles, but only the profile owner can make changes.
 
